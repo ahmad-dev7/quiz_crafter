@@ -27,104 +27,117 @@ class _TakeQuizState extends State<TakeQuiz> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color(0xFF272727),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(60, 30, 60, 0),
-        child: Column(
-          children: [
-            //* Question number info and reveal button
-            QuizHeader(
-              onReveal: onReveal,
-              info: 'Question  $currentQuestion / ${quiz.questions.length}',
-            ),
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * .07,
+          vertical: size.height * .05,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //* Question number info and reveal button
 
-            const Spacer(),
-
-            //* Question text
-            FractionallySizedBox(
-              widthFactor: 0.55,
-              child: MyText(
-                quiz.questions[currentQuestion - 1].question,
-                textAlign: TextAlign.center,
-                size: 35,
+              QuizHeader(
+                onReveal: onReveal,
+                info: 'Question  $currentQuestion / ${quiz.questions.length}',
               ),
-            ),
 
-            const Spacer(),
-
-            //* Options
-            FractionallySizedBox(
-              widthFactor: 0.8,
-              child: SizedBox(
-                height: 56 * 6,
-                child: ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: ListTile(
-                        onTap: () => setState(() {
-                          selectedOption = index;
-                          selectedOptionColor = const Color(0xFFB1B1B1);
-                        }),
-                        selected: selectedOption == index,
-                        selectedTileColor: selectedOptionColor,
-                        tileColor: getTileColor(index),
-                        horizontalTitleGap: -10,
-                        //* Option number like a,b,c,d
-                        leading: MyText(
-                          leadingText(index),
-                          color: Colors.black54,
-                          weight: FontWeight.bold,
-                        ),
-                        //* Options
-                        title: MyText(
-                          quiz.questions[currentQuestion - 1].options[index],
-                          color: Colors.black,
-                          weight: FontWeight.w500,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    );
-                  },
+              const Spacer(),
+              const SizedBox(height: 20),
+              //* Question text
+              FractionallySizedBox(
+                widthFactor: 0.4,
+                child: SizedBox(
+                  height: 150,
+                  child: MyText(
+                    quiz.questions[currentQuestion - 1].question,
+                    textAlign: TextAlign.center,
+                    size: 35,
+                  ),
                 ),
               ),
-            ),
 
-            const Spacer(),
+              const Spacer(),
 
-            //* Previous and Next button
-            FractionallySizedBox(
-              widthFactor: 0.8,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  //* Go to Previous question button
-                  MoveToButton(
-                    visibility: currentQuestion != 1,
-                    onTap: () => moveTo('-'),
-                    label: 'Previous',
-                    color: Colors.blueGrey.withOpacity(0.9),
-                    icon: Icons.arrow_back,
+              const SizedBox(height: 20),
+
+              //* Options
+              FractionallySizedBox(
+                widthFactor: 0.55,
+                child: SizedBox(
+                  height: 56 * 5.5,
+                  child: ListView.builder(
+                    itemCount: 4,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: ListTile(
+                          onTap: () => setState(() {
+                            selectedOption = index;
+                            selectedOptionColor = const Color(0xFFB1B1B1);
+                          }),
+                          selected: selectedOption == index,
+                          selectedTileColor: selectedOptionColor,
+                          tileColor: getTileColor(index),
+                          horizontalTitleGap: -10,
+                          //* Option number like a,b,c,d
+                          leading: MyText(
+                            leadingText(index),
+                            color: Colors.black54,
+                            weight: FontWeight.bold,
+                          ),
+                          //* Options
+                          title: MyText(
+                            quiz.questions[currentQuestion - 1].options[index],
+                            color: Colors.black,
+                            weight: FontWeight.w500,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                  //* Go to next question button
-                  MoveToButton(
-                    visibility: currentQuestion < quiz.questions.length,
-                    onTap: () => moveTo('+'),
-                    label: 'Next',
-                    color: Colors.blueAccent.withOpacity(0.7),
-                    icon: Icons.arrow_forward,
-                  ),
-                ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: 20),
-          ],
+              const Spacer(),
+
+              //* Previous and Next button
+              FractionallySizedBox(
+                widthFactor: 0.8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    //* Go to Previous question button
+                    MoveToButton(
+                      visibility: currentQuestion != 1,
+                      onTap: () => moveTo('-'),
+                      label: 'Previous',
+                      color: Colors.blueGrey.withOpacity(0.9),
+                      icon: Icons.arrow_back_ios,
+                    ),
+                    const SizedBox(width: 20),
+                    //* Go to next question button
+                    MoveToButton(
+                      visibility: currentQuestion < quiz.questions.length,
+                      onTap: () => moveTo('+'),
+                      label: 'Next',
+                      color: Colors.blueAccent,
+                      icon: Icons.arrow_forward_ios,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
