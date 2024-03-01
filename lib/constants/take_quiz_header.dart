@@ -8,26 +8,29 @@ class QuizHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        InkWell(
-          onDoubleTap: () => Navigator.pop(context),
-          child: MyText(
-            info,
-            weight: FontWeight.w500,
-            size: 16,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onDoubleTap: () => Navigator.pop(context),
+            child: MyText(
+              info,
+              weight: FontWeight.w500,
+              size: 16,
+            ),
           ),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFF4F4F4),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
-          onPressed: onReveal,
-          child: const MyText('Reveal', color: Colors.black),
-        )
-      ],
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFF4F4F4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
+            onPressed: onReveal,
+            child: const MyText('Reveal', color: Colors.black),
+          )
+        ],
+      ),
     );
   }
 }
