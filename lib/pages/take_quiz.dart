@@ -57,7 +57,7 @@ class _TakeQuizState extends State<TakeQuiz> {
             FractionallySizedBox(
               widthFactor: 0.8,
               child: SizedBox(
-                height: 270,
+                height: 56 * 6,
                 child: ListView.builder(
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
@@ -108,7 +108,7 @@ class _TakeQuizState extends State<TakeQuiz> {
                     visibility: currentQuestion != 1,
                     onTap: () => moveTo('-'),
                     label: 'Previous',
-                    color: Colors.blueGrey.withOpacity(0.5),
+                    color: Colors.blueGrey.withOpacity(0.9),
                     icon: Icons.arrow_back,
                   ),
                   //* Go to next question button
@@ -116,12 +116,13 @@ class _TakeQuizState extends State<TakeQuiz> {
                     visibility: currentQuestion < quiz.questions.length,
                     onTap: () => moveTo('+'),
                     label: 'Next',
-                    color: Colors.blueAccent.withOpacity(0.5),
+                    color: Colors.blueAccent.withOpacity(0.7),
                     icon: Icons.arrow_forward,
                   ),
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
           ],
         ),
@@ -150,7 +151,12 @@ class _TakeQuizState extends State<TakeQuiz> {
         currentQuestion++;
       });
     } else {
-      setState(() => currentQuestion--);
+      setState(() {
+        correctOptionColor = const Color(0xE9FFFFFF);
+        selectedOptionColor = const Color(0xE9FFFFFF);
+        selectedOption = -1;
+        currentQuestion--;
+      });
     }
   }
 

@@ -21,7 +21,7 @@ class QuizHeader extends StatelessWidget {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xD5FFFFFF),
+              backgroundColor: const Color(0xFFF4F4F4),
               padding:
                   const EdgeInsets.symmetric(horizontal: 30, vertical: 15)),
           onPressed: onReveal,
