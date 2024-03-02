@@ -50,15 +50,38 @@ class _TakeQuizState extends State<TakeQuiz> {
               const Spacer(),
               const SizedBox(height: 20),
               //* Question text
-              FractionallySizedBox(
-                widthFactor: 0.4,
-                child: SizedBox(
-                  height: 150,
-                  child: MyText(
-                    quiz.questions[currentQuestion - 1].question,
-                    textAlign: TextAlign.center,
-                    size: 35,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  children: [
+                    MoveToButton(
+                      visibility: currentQuestion != 1,
+                      onTap: () => moveTo('-'),
+                      label: '',
+                      icon: Icons.arrow_back_ios_new_outlined,
+                      color: const Color(0xFF292929),
+                    ),
+                    const Spacer(),
+                    Flexible(
+                      flex: 2,
+                      child: SizedBox(
+                        height: 150,
+                        child: MyText(
+                          quiz.questions[currentQuestion - 1].question,
+                          textAlign: TextAlign.center,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    MoveToButton(
+                      visibility: currentQuestion < quiz.questions.length,
+                      onTap: () => moveTo('+'),
+                      label: '',
+                      icon: Icons.arrow_forward_ios_outlined,
+                      color: const Color(0xFF292929),
+                    ),
+                  ],
                 ),
               ),
 
@@ -110,32 +133,32 @@ class _TakeQuizState extends State<TakeQuiz> {
               const Spacer(),
 
               //* Previous and Next button
-              FractionallySizedBox(
-                widthFactor: 0.8,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //* Go to Previous question button
-                    MoveToButton(
-                      visibility: currentQuestion != 1,
-                      onTap: () => moveTo('-'),
-                      label: 'Previous',
-                      color: Colors.blueGrey.withOpacity(0.9),
-                      icon: Icons.arrow_back_ios,
-                    ),
-                    const SizedBox(width: 20),
-                    //* Go to next question button
-                    MoveToButton(
-                      visibility: currentQuestion < quiz.questions.length,
-                      onTap: () => moveTo('+'),
-                      label: 'Next',
-                      color: Colors.blueAccent,
-                      icon: Icons.arrow_forward_ios,
-                    ),
-                  ],
-                ),
-              ),
+              // FractionallySizedBox(
+              //   widthFactor: 0.8,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     children: [
+              //       //* Go to Previous question button
+              //       MoveToButton(
+              //         visibility: currentQuestion != 1,
+              //         onTap: () => moveTo('-'),
+              //         label: 'Previous',
+              //         color: Colors.blueGrey.withOpacity(0.9),
+              //         icon: Icons.arrow_back_ios,
+              //       ),
+              //       const SizedBox(width: 20),
+              //       //* Go to next question button
+              //       MoveToButton(
+              //         visibility: currentQuestion < quiz.questions.length,
+              //         onTap: () => moveTo('+'),
+              //         label: 'Next',
+              //         color: Colors.blueAccent,
+              //         icon: Icons.arrow_forward_ios,
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
