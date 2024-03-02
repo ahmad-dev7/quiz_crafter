@@ -17,25 +17,27 @@ class MoveToButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: visibility,
-      replacement: const SizedBox(
-        height: 56 * 4.8,
-        width: 80,
-      ),
-      child: InkWell(
-        radius: 50,
-        borderRadius: BorderRadius.circular(15),
-        onTap: onTap,
-        child: Container(
-          height: 56 * 4.8,
+    return Center(
+      child: Visibility(
+        visible: visibility,
+        replacement: const SizedBox(
+          height: 50,
           width: 80,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: color,
+        ),
+        child: InkWell(
+          radius: 50,
+          borderRadius: BorderRadius.circular(15),
+          onTap: onTap,
+          child: Container(
+            height: 56,
+            width: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: color,
+            ),
+            alignment: Alignment.center,
+            child: Icon(icon, color: Colors.white, size: 30),
           ),
-          alignment: Alignment.center,
-          child: Icon(icon, color: Colors.white, size: 30),
         ),
       ),
     );
